@@ -10,6 +10,9 @@ function setup() {
 
 function draw() {
   background(150,150,150);
+  fill(255,140);
+  textSize(16);
+  text("tap a key to blow them away",width-240,height-20);
   area.display();
 
   let mouse = createVector(mouseX,mouseY);
@@ -22,7 +25,7 @@ function draw() {
     }
   }
 
-  for(let i=0; i<balls.length; i++){
+  for(let i=balls.length-1; i>=0; i--){
     let b = balls[i];
     for(let j=0; j<balls.length; j++){
       if(j!=i){
@@ -73,5 +76,11 @@ function draw() {
     // b.checkBounce(area);
     b.disappear();
     b.display();
+  }
+  for(let i=balls.length-1; i>=0; i--){
+    b = balls[i];
+    if(b.pos.x>width||b.pos.x<0||b.pos.y<0){
+      balls.splice(i,1);
+    }
   }
 }
